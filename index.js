@@ -133,7 +133,7 @@ class RNParallax extends Component {
           },
         ]}
       >
-        <Text medium style={[styles.headerText, titleStyle]}>
+        <Text style={[styles.headerText, titleStyle]}>
           {title}
         </Text>
       </Animated.View>
