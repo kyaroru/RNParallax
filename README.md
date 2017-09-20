@@ -8,6 +8,8 @@
 ```bash
 $ npm i react-native-parallax-header --save
 ```
+## Demo
+![RNParallax Demo](https://media.giphy.com/media/iMPRpu4Ljxf2/giphy.gif)
 
 ## Example
 ```jsx
@@ -31,7 +33,7 @@ render() {
   return (
     <View flex style={styles.container}>
       <ReactNativeParallaxHeader
-        headerHeight={normalize(170)}
+        headerHeight={170}
         navbarColor={Colors.primary}
         title={'Parallax Header :p'}
         titleStyle={styles.titleStyle}
