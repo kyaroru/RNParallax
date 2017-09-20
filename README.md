@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.white,
   },
   titleStyle: {
-    fontSize: normalize(16),
+    fontSize: 16,
   },
 });
 
@@ -46,7 +46,7 @@ render() {
 
 ## API Usage
 | Property | Type | Required | Description | Default |
-| -------- | ---- | -------- | ----------- |
+| -------- | ---- | -------- | ----------- | ------- |
 | `renderNavBar` | `func` | No | This renders the nav bar component | Empty `<View />` |
 | `renderContent` | `func` | **YES** | This renders the scroll view content | - |
 | `backgroundColor` | `string` | No | This is the color of the parallax background (before scrolling up), **will not be used if `backgroundImage` is specified** | Default color is `#777777` |
