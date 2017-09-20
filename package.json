@@ -1,5 +1,5 @@
 {
-  "name": "react-native-parallax",
+  "name": "react-native-parallax-header",
   "version": "1.0.0",
   "description": "A react native scroll view component with Parallax header :p",
   "main": "index.js",
