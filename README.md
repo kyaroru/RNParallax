@@ -9,7 +9,7 @@
 $ npm i react-native-parallax-header --save
 ```
 ## Demo
-![iPhone 6s (Image)](https://media.giphy.com/media/iMPRpu4Ljxf2/giphy.gif)
+![iPhone X (Image)](http://g.recordit.co/MpM4nTpzKo.gif)
 ![iPhone X (Color)](http://g.recordit.co/oTwlJaCPN0.gif)
 
 ## Example
@@ -52,7 +52,7 @@ render() {
 | -------- | ---- | -------- | ----------- | ------- |
 | `renderNavBar` | `func` | No | This renders the nav bar component | Empty `<View />` |
 | `renderContent` | `func` | **YES** | This renders the scroll view content | - |
-| `backgroundColor` | `string` | No | This is the color of the parallax background (before scrolling up), **will not be used if `backgroundImage` is specified** | Default color is `#777777` |
+| `backgroundColor` | `string` | No | This is the color of the parallax background (before scrolling up), **will not be used if `backgroundImage` is specified** | Default color is `#303F9F` |
 | `backgroundImage` | `image source` | No | This renders the background image of the header | Default is `null` |
 | `navbarColor` | `string` | No | This is the background color of the navbar (after scroll up) | Default color is `3498db` |
 | `title` | `string` | No | This is the title to be display in the header | Default is empty string `‘’` | 
