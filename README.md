@@ -9,7 +9,8 @@
 $ npm i react-native-parallax-header --save
 ```
 ## Demo
-![RNParallax Demo](https://media.giphy.com/media/iMPRpu4Ljxf2/giphy.gif)
+![iPhone 6s (Image)](https://media.giphy.com/media/iMPRpu4Ljxf2/giphy.gif)
+![iPhone X (Color)](http://g.recordit.co/oTwlJaCPN0.gif)
 
 ## Example
 ```jsx

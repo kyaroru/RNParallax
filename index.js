@@ -7,13 +7,22 @@ import {
   Animated,
   Text,
   View,
+  Dimensions,
 } from 'react-native';
+
+const {
+  height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
+
+const IS_IPHONE_X = SCREEN_HEIGHT === 812;
+const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
+const NAV_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 45;
 
 const SCROLL_EVENT_THROTTLE = 16;
 const DEFAULT_HEADER_MAX_HEIGHT = 200;
-const DEFAULT_HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 65 : 45;
+const DEFAULT_HEADER_MIN_HEIGHT = NAV_BAR_HEIGHT;
 const DEFAULT_NAVBAR_COLOR = '#3498db';
-const DEFAULT_BACKGROUND_COLOR = '#777777';
+const DEFAULT_BACKGROUND_COLOR = '#303F9F';
 const DEFAULT_TITLE_COLOR = 'white';
 
 const styles = StyleSheet.create({
@@ -59,7 +68,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    paddingTop: Platform.OS === 'ios' ? 20 : 0,
+    paddingTop: STATUS_BAR_HEIGHT,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -111,7 +120,7 @@ class RNParallax extends Component {
   getTitleTranslate() {
     return this.state.scrollY.interpolate({
       inputRange: [0, this.getHeaderScrollDistance() / 2, this.getHeaderScrollDistance()],
-      outputRange: [0, 0, Platform.OS === 'ios' ? -3 : 0],
+      outputRange: [0, 0, Platform.OS === 'ios' ? -2 : 0],
       extrapolate: 'clamp',
     });
   }
