@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 
 render() {
   return (
-    <View flex style={styles.container}>
+    <View style={styles.container}>
       <ReactNativeParallaxHeader
         headerHeight={170}
         navbarColor={Colors.primary}
