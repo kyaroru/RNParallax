@@ -9,8 +9,13 @@
 $ npm i react-native-parallax-header --save
 ```
 ## Demo
-![iPhone X (Image)](http://g.recordit.co/MpM4nTpzKo.gif)
-![iPhone X (Color)](http://g.recordit.co/oTwlJaCPN0.gif)
+### iPhone X
+![iPhone X (Image)](http://g.recordit.co/o24X5s9rFv.gif)
+![iPhone X (Color)](http://g.recordit.co/Owbt2X4ZCo.gif)
+
+### iPhone 8
+![iPhone 8 (Image)](http://g.recordit.co/7dbGiEDx7H.gif)
+![iPhone 8 (Color)](http://g.recordit.co/YxXtQjTXMU.gif)
 
 ## Example
 ```jsx
@@ -35,10 +40,12 @@ render() {
     <View style={styles.container}>
       <ReactNativeParallaxHeader
         headerHeight={170}
+        extraScrollHeight={20}
         navbarColor={Colors.primary}
         title={'Parallax Header :p'}
         titleStyle={styles.titleStyle}
         backgroundImage={viewImages.background}
+        backgroundImageScale={1.2}
         renderNavBar={this.renderNavBar}
         renderContent={this.renderContent}
       />
@@ -52,11 +59,13 @@ render() {
 | -------- | ---- | -------- | ----------- | ------- |
 | `renderNavBar` | `func` | No | This renders the nav bar component | Empty `<View />` |
 | `renderContent` | `func` | **YES** | This renders the scroll view content | - |
+| `headerHeight` | `number` | No | This is the header maximum height | Default to `200` |
 | `backgroundColor` | `string` | No | This is the color of the parallax background (before scrolling up), **will not be used if `backgroundImage` is specified** | Default color is `#303F9F` |
 | `backgroundImage` | `image source` | No | This renders the background image of the header | Default is `null` |
+| `backgroundImageScale` | `number` | No | This is the image scale (after scrolling to bottom & exceed the headerHeight) | Default is `1.5` |
+| `extraScrollHeight` | `number` | No | This is the extra scroll height (after scrolling to bottom & exceed the headerHeight) | Default is `50` |
 | `navbarColor` | `string` | No | This is the background color of the navbar (after scroll up) | Default color is `3498db` |
 | `title` | `string` | No | This is the title to be display in the header | Default is empty string `‘’` | 
 | `titleStyle` | `style` | No | This is the title style to override default font size/color | Default to `color: ‘white’ `text and `fontSize: 16` |
-| `headerHeight` | `number` | No | This is the header maximum height | Default to `200` |
 | `scrollEventThrottle` | `number` | No | This is the scroll event throttle | Default is `16` |
 

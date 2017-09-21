@@ -21,6 +21,9 @@ const NAV_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 45;
 const SCROLL_EVENT_THROTTLE = 16;
 const DEFAULT_HEADER_MAX_HEIGHT = 200;
 const DEFAULT_HEADER_MIN_HEIGHT = NAV_BAR_HEIGHT;
+const DEFAULT_EXTRA_SCROLL_HEIGHT = 50;
+const DEFAULT_BACKGROUND_IMAGE_SCALE = 1.5;
+
 const DEFAULT_NAVBAR_COLOR = '#3498db';
 const DEFAULT_BACKGROUND_COLOR = '#303F9F';
 const DEFAULT_TITLE_COLOR = 'white';
@@ -92,35 +95,53 @@ class RNParallax extends Component {
     return headerHeight - DEFAULT_HEADER_MIN_HEIGHT;
   }
 
+  getExtraScrollHeight() {
+    const { extraScrollHeight } = this.props;
+    return extraScrollHeight;
+  }
+
+  getBackgroundImageScale() {
+    const { backgroundImageScale } = this.props;
+    return backgroundImageScale;
+  }
+
   getHeaderHeight() {
     const { headerHeight } = this.props;
     return this.state.scrollY.interpolate({
-      inputRange: [0, this.getHeaderScrollDistance()],
-      outputRange: [headerHeight, DEFAULT_HEADER_MIN_HEIGHT],
+      inputRange: [-this.getExtraScrollHeight(), 0, this.getHeaderScrollDistance()],
+      outputRange: [headerHeight + this.getExtraScrollHeight(), headerHeight, DEFAULT_HEADER_MIN_HEIGHT],
       extrapolate: 'clamp',
     });
   }
 
   getImageOpacity() {
     return this.state.scrollY.interpolate({
-      inputRange: [0, this.getHeaderScrollDistance() / 2, this.getHeaderScrollDistance()],
-      outputRange: [1, 1, 0],
+      inputRange: [-this.getExtraScrollHeight(), 0, this.getHeaderScrollDistance() / 2, this.getHeaderScrollDistance()],
+      outputRange: [1, 1, 1, 0],
       extrapolate: 'clamp',
     });
   }
 
   getImageTranslate() {
     return this.state.scrollY.interpolate({
-      inputRange: [0, this.getHeaderScrollDistance()],
-      outputRange: [0, -50],
+      inputRange: [-this.getExtraScrollHeight(), 0, this.getHeaderScrollDistance()],
+      outputRange: [this.getExtraScrollHeight(), 0, -50],
       extrapolate: 'clamp',
+    });
+  }
+
+  getImageScale() {
+    return this.state.scrollY.interpolate({
+      inputRange: [-this.getExtraScrollHeight(), 0, this.getHeaderScrollDistance()],
+      outputRange: [this.getBackgroundImageScale(), 1, 1],
+      extrapolate: 'clamp'
     });
   }
 
   getTitleTranslate() {
     return this.state.scrollY.interpolate({
-      inputRange: [0, this.getHeaderScrollDistance() / 2, this.getHeaderScrollDistance()],
-      outputRange: [0, 0, Platform.OS === 'ios' ? -2 : 0],
+      inputRange: [-this.getExtraScrollHeight(), 0, this.getHeaderScrollDistance() / 2, this.getHeaderScrollDistance()],
+      outputRange: [5, 0, 0, Platform.OS === 'ios' ? -2 : 0],
       extrapolate: 'clamp',
     });
   }
@@ -162,6 +183,7 @@ class RNParallax extends Component {
     const { headerHeight, backgroundImage } = this.props;
     const imageOpacity = this.getImageOpacity();
     const imageTranslate = this.getImageTranslate();
+    const imageScale = this.getImageScale();
 
     return (
       <Animated.Image
@@ -169,7 +191,7 @@ class RNParallax extends Component {
           styles.backgroundImage,
           {
             opacity: imageOpacity,
-            transform: [{ translateY: imageTranslate }],
+            transform: [{ translateY: imageTranslate }, { scale: imageScale }],
             height: headerHeight,
           },
         ]}
@@ -182,14 +204,15 @@ class RNParallax extends Component {
     const { headerHeight, backgroundColor } = this.props;
     const imageOpacity = this.getImageOpacity();
     const imageTranslate = this.getImageTranslate();
-
+    const imageScale = this.getImageScale();
+    
     return (
       <Animated.View
         style={{
           height: headerHeight,
           backgroundColor,
           opacity: imageOpacity,
-          transform: [{ translateY: imageTranslate }],
+          transform: [{ translateY: imageTranslate }, { scale: imageScale }],
         }}
       />
     );
@@ -219,7 +242,7 @@ class RNParallax extends Component {
     const { renderContent, headerHeight, scrollEventThrottle } = this.props;
     return (
       <View style={styles.container}>
-        <ScrollView
+        <Animated.ScrollView
           style={styles.scrollView}
           scrollEventThrottle={scrollEventThrottle}
           onScroll={Animated.event(
@@ -229,7 +252,7 @@ class RNParallax extends Component {
           <View style={[styles.scrollViewContent, { marginTop: headerHeight }]}>
             {renderContent()}
           </View>
-        </ScrollView>
+        </Animated.ScrollView>
         {this.renderHeaderBackground()}
         {this.renderHeaderTitle()}        
         {this.renderHeaderForeground()}
@@ -248,6 +271,8 @@ RNParallax.propTypes = {
   titleStyle: PropTypes.number,
   headerHeight: PropTypes.number,
   scrollEventThrottle: PropTypes.number,
+  extraScrollHeight: PropTypes.number,
+  backgroundImageScale: PropTypes.number,
 };
 
 RNParallax.defaultProps = {
@@ -259,6 +284,8 @@ RNParallax.defaultProps = {
   titleStyle: styles.headerText,
   headerHeight: DEFAULT_HEADER_MAX_HEIGHT,
   scrollEventThrottle: SCROLL_EVENT_THROTTLE,
+  extraScrollHeight: DEFAULT_EXTRA_SCROLL_HEIGHT,
+  backgroundImageScale: DEFAULT_BACKGROUND_IMAGE_SCALE,
 };
 
 export default RNParallax;
