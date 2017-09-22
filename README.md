@@ -39,7 +39,8 @@ render() {
   return (
     <View style={styles.container}>
       <ReactNativeParallaxHeader
-        headerHeight={170}
+        headerMinHeight={120}
+        headerMaxHeight={170}
         extraScrollHeight={20}
         navbarColor={Colors.primary}
         title={'Parallax Header :p'}
@@ -59,11 +60,12 @@ render() {
 | -------- | ---- | -------- | ----------- | ------- |
 | `renderNavBar` | `func` | No | This renders the nav bar component | Empty `<View />` |
 | `renderContent` | `func` | **YES** | This renders the scroll view content | - |
-| `headerHeight` | `number` | No | This is the header maximum height | Default to `200` |
+| `headerMaxHeight` | `number` | No | This is the header maximum height | Default to `200` |
+| `headerMinHeight` | `number` | No | This is the header minimum height | Default to common ios & android navbar height (have support for iPhone X too :p) |
+| `backgroundImage` | `image source` | No | This renders the background image of the header (**if specified, background color will not take effect**) | Default is `null` |
+| `backgroundImageScale` | `number` | No | This is the image scale - either enlarge or shrink (after scrolling to bottom & exceed the headerMaxHeight) | Default is `1.5` |
 | `backgroundColor` | `string` | No | This is the color of the parallax background (before scrolling up), **will not be used if `backgroundImage` is specified** | Default color is `#303F9F` |
-| `backgroundImage` | `image source` | No | This renders the background image of the header | Default is `null` |
-| `backgroundImageScale` | `number` | No | This is the image scale (after scrolling to bottom & exceed the headerHeight) | Default is `1.5` |
-| `extraScrollHeight` | `number` | No | This is the extra scroll height (after scrolling to bottom & exceed the headerHeight) | Default is `50` |
+| `extraScrollHeight` | `number` | No | This is the extra scroll height (after scrolling to bottom & exceed the headerMaxHeight) | Default is `50` |
 | `navbarColor` | `string` | No | This is the background color of the navbar (after scroll up) | Default color is `3498db` |
 | `title` | `string` | No | This is the title to be display in the header | Default is empty string `‘’` | 
 | `titleStyle` | `style` | No | This is the title style to override default font size/color | Default to `color: ‘white’ `text and `fontSize: 16` |
