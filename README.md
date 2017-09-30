@@ -1,5 +1,11 @@
 
-# react-native-parallax-header
+# RNParallax (react-native-parallax-header)
+[![GitHub stars](https://img.shields.io/github/stars/kyaroru/RNParallax.svg)](https://github.com/kyaroru/RNParallax/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/kyaroru/RNParallax.svg)](https://github.com/kyaroru/RNParallax/network)
+[![GitHub issues](https://img.shields.io/github/issues/kyaroru/RNParallax.svg)](https://github.com/kyaroru/RNParallax/issues)
+
+[![NPM](https://nodei.co/npm/react-native-parallax-header.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/react-native-parallax-header/)
+
 - A react native scroll view component with Parallax header :p
 - Inspired by [GitHub - jaysoo/react-native-parallax-scroll-view](https://github.com/jaysoo/react-native-parallax-scroll-view)
 - Code is based on [React Native ScrollView animated header – App & Flow – Medium](https://medium.com/appandflow/react-native-scrollview-animated-header-10a18cb9469e) and added little customisation :p
