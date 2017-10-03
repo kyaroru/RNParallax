@@ -72,7 +72,7 @@ render() {
 | `backgroundImageScale` | `number` | No | This is the image scale - either enlarge or shrink (after scrolling to bottom & exceed the headerMaxHeight) | Default is `1.5` |
 | `backgroundColor` | `string` | No | This is the color of the parallax background (before scrolling up), **will not be used if `backgroundImage` is specified** | Default color is `#303F9F` |
 | `extraScrollHeight` | `number` | No | This is the extra scroll height (after scrolling to bottom & exceed the headerMaxHeight) | Default is `50` |
-| `navbarColor` | `string` | No | This is the background color of the navbar (after scroll up) | Default color is `3498db` |
+| `navbarColor` | `string` | No | This is the background color of the navbar (after scroll up) | Default color is `#3498db` |
 | `title` | `string` | No | This is the title to be display in the header | Default is empty string `‘’` | 
 | `titleStyle` | `style` | No | This is the title style to override default font size/color | Default to `color: ‘white’ `text and `fontSize: 16` |
 | `scrollEventThrottle` | `number` | No | This is the scroll event throttle | Default is `16` |
