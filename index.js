@@ -316,7 +316,7 @@ RNParallax.propTypes = {
   renderNavBar: PropTypes.func,
   renderContent: PropTypes.func.isRequired,
   backgroundColor: PropTypes.string,
-  backgroundImage: PropTypes.number,
+  backgroundImage: PropTypes.any,
   navbarColor: PropTypes.string,
   title: PropTypes.string,
   titleStyle: PropTypes.number,
