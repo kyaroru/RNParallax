@@ -13,7 +13,7 @@ const {
   height: SCREEN_HEIGHT,
 } = Dimensions.get('window');
 
-const IS_IPHONE_X = SCREEN_HEIGHT === 812;
+const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
 const NAV_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 45;
 
@@ -281,15 +281,18 @@ class RNParallax extends Component {
   }
 
   renderScrollView() {
-    const { renderContent, scrollEventThrottle } = this.props;
+    const { renderContent, scrollEventThrottle, contentContainerStyle, containerStyle } = this.props;
 
     return (
       <Animated.ScrollView
         style={styles.scrollView}
         scrollEventThrottle={scrollEventThrottle}
-        onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }])}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }],
+        )}
+        contentContainerStyle={contentContainerStyle}
       >
-        <View style={{ marginTop: this.getHeaderMaxHeight() }}>
+        <View style={[{ marginTop: this.getHeaderMaxHeight() }, containerStyle]}>
           {renderContent()}
         </View>
       </Animated.ScrollView>
@@ -316,12 +319,14 @@ RNParallax.propTypes = {
   backgroundImage: PropTypes.any,
   navbarColor: PropTypes.string,
   title: PropTypes.string,
-  titleStyle: PropTypes.number,
+  titleStyle: PropTypes.any,
   headerMaxHeight: PropTypes.number,
   headerMinHeight: PropTypes.number,
   scrollEventThrottle: PropTypes.number,
   extraScrollHeight: PropTypes.number,
   backgroundImageScale: PropTypes.number,
+  contentContainerStyle: PropTypes.any,
+  containerStyle: PropTypes.any,
 };
 
 RNParallax.defaultProps = {
@@ -336,6 +341,8 @@ RNParallax.defaultProps = {
   scrollEventThrottle: SCROLL_EVENT_THROTTLE,
   extraScrollHeight: DEFAULT_EXTRA_SCROLL_HEIGHT,
   backgroundImageScale: DEFAULT_BACKGROUND_IMAGE_SCALE,
+  contentContainerStyle: null,
+  containerStyle: null,
 };
 
 export default RNParallax;
