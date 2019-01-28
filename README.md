@@ -15,25 +15,26 @@
 $ npm i react-native-parallax-header --save
 ```
 ## Demo
+### iPhone X or XS (Using `alwaysShowTitle={false}` & `alwaysShowNavBar={false}`)
+![iPhone X](https://i.gyazo.com/24343e2127b8e479a52f4bc5853ef457.gif)
+
 ### iPhone X or XS
-![iPhone X (Image)](http://g.recordit.co/iWW0MOia6i.gif)
-![iPhone X (Color)](http://g.recordit.co/vDfanKwzy0.gif)
+![iPhone X](https://i.gyazo.com/b24881b191ce5a69e7de14b7d0bb688e.gif)
 
 ### iPhone 8
-![iPhone 8 (Image)](http://g.recordit.co/g7zcxrsKD6.gif)
-![iPhone 8 (Color)](http://g.recordit.co/3JYXSvjFAM.gif)
+![iPhone 8](https://i.gyazo.com/eebeff28c7df7b0233fabb9cf2a9c5dc.gif)
 
 ## Example
 ```jsx
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ReactNativeParallaxHeader from 'react-native-parallax-header';
 
-const IS_IPHONE_X = SCREEN_HEIGHT === || SCREEN_HEIGHT === 896;
+const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
-const HEADER_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 45;
+const HEADER_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 64;
 const NAV_BAR_HEIGHT = HEADER_HEIGHT - STATUS_BAR_HEIGHT;
 
-const viewImages = {
+const images = {
   background: require('../../../img/test.jpg'),
 };
 
@@ -52,12 +53,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: Colors.transparent,
-  },
-  innerContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 10,
   },
   titleStyle: {
     color: Colors.white,
@@ -90,7 +85,7 @@ render() {
         navbarColor={Colors.primary}
         title="Parallax Header ~"
         titleStyle={styles.titleStyle}
-        backgroundImage={viewImages.background}
+        backgroundImage={images.background}
         backgroundImageScale={1.2}
         renderNavBar={this.renderNavBar}
         renderContent={this.renderContent}
@@ -107,15 +102,17 @@ render() {
 | -------- | ---- | -------- | ----------- | ------- |
 | `renderNavBar` | `func` | No | This renders the nav bar component | Empty `<View />` |
 | `renderContent` | `func` | **YES** | This renders the scroll view content | - |
-| `headerMaxHeight` | `number` | No | This is the header maximum height | Default to `200` |
+| `headerMaxHeight` | `number` | No | This is the header maximum height | Default to `170` |
 | `headerMinHeight` | `number` | No | This is the header minimum height | Default to common ios & android navbar height (have support for iPhone X too :p) |
 | `backgroundImage` | `image source` | No | This renders the background image of the header (**if specified, background color will not take effect**) | Default is `null` |
 | `backgroundImageScale` | `number` | No | This is the image scale - either enlarge or shrink (after scrolling to bottom & exceed the headerMaxHeight) | Default is `1.5` |
 | `backgroundColor` | `string` | No | This is the color of the parallax background (before scrolling up), **will not be used if `backgroundImage` is specified** | Default color is `#303F9F` |
-| `extraScrollHeight` | `number` | No | This is the extra scroll height (after scrolling to bottom & exceed the headerMaxHeight) | Default is `50` |
+| `extraScrollHeight` | `number` | No | This is the extra scroll height (after scrolling to bottom & exceed the headerMaxHeight) | Default is `30` |
 | `navbarColor` | `string` | No | This is the background color of the navbar (after scroll up) | Default color is `#3498db` |
-| `title` | `string` | No | This is the title to be display in the header | Default is empty string `‘’` |
+| `title` | `any` | No | This is the title to be display in the header, can be string or component | Default to null |
 | `titleStyle` | `style` | No | This is the title style to override default font size/color | Default to `color: ‘white’ `text and `fontSize: 16` |
 | `scrollEventThrottle` | `number` | No | This is the scroll event throttle | Default is `16` |
 | `contentContainerStyle` | `style` | No | This is the contentContainerStyle style to override default `<ScrollView>` contentContainerStyle style | Default to null |
 | `contentStyle` | `style` | No | This is the inner content style to override default `<View>` style inside `<ScrollView>` component | Default to null |
+| `alwaysShowTitle` | `bool` | No | This is to determine whether show or hide the title after scroll | Default to `true` |
+| `alwaysShowNavBar` | `bool` | No | This is to determine whether show or hide the navBar before scroll | Default to `true` |
