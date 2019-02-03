@@ -104,15 +104,16 @@ render() {
 | `renderContent` | `func` | **YES** | This renders the scroll view content | - |
 | `headerMaxHeight` | `number` | No | This is the header maximum height | Default to `170` |
 | `headerMinHeight` | `number` | No | This is the header minimum height | Default to common ios & android navbar height (have support for iPhone X too :p) |
-| `backgroundImage` | `image source` | No | This renders the background image of the header (**if specified, background color will not take effect**) | Default is `null` |
+| `backgroundImage` | `image source` | No | This renders the background image of the header (**if specified, background color will not take effect**) | Default to `null` |
 | `backgroundImageScale` | `number` | No | This is the image scale - either enlarge or shrink (after scrolling to bottom & exceed the headerMaxHeight) | Default is `1.5` |
 | `backgroundColor` | `string` | No | This is the color of the parallax background (before scrolling up), **will not be used if `backgroundImage` is specified** | Default color is `#303F9F` |
 | `extraScrollHeight` | `number` | No | This is the extra scroll height (after scrolling to bottom & exceed the headerMaxHeight) | Default is `30` |
 | `navbarColor` | `string` | No | This is the background color of the navbar (after scroll up) | Default color is `#3498db` |
-| `title` | `any` | No | This is the title to be display in the header, can be string or component | Default to null |
+| `statusBarColor` | `string` | No | This is the status bar color (for android) navBarColor will be used if no statusBarColor is passed in | Default to `null` |
+| `title` | `any` | No | This is the title to be display in the header, can be string or component | Default to `null` |
 | `titleStyle` | `style` | No | This is the title style to override default font size/color | Default to `color: ‘white’ `text and `fontSize: 16` |
 | `scrollEventThrottle` | `number` | No | This is the scroll event throttle | Default is `16` |
-| `contentContainerStyle` | `style` | No | This is the contentContainerStyle style to override default `<ScrollView>` contentContainerStyle style | Default to null |
-| `contentStyle` | `style` | No | This is the inner content style to override default `<View>` style inside `<ScrollView>` component | Default to null |
+| `contentContainerStyle` | `style` | No | This is the contentContainerStyle style to override default `<ScrollView>` contentContainerStyle style | Default to `null` |
+| `contentStyle` | `style` | No | This is the inner content style to override default `<View>` style inside `<ScrollView>` component | Default to `null` |
 | `alwaysShowTitle` | `bool` | No | This is to determine whether show or hide the title after scroll | Default to `true` |
 | `alwaysShowNavBar` | `bool` | No | This is to determine whether show or hide the navBar before scroll | Default to `true` |

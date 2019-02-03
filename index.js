@@ -338,11 +338,11 @@ class RNParallax extends Component {
   }
 
   render() {
-    const { navbarColor } = this.props;
+    const { navbarColor, statusBarColor } = this.props;
     return (
       <View style={styles.container}>
         <StatusBar
-          backgroundColor={navbarColor}
+          backgroundColor={statusBarColor || navbarColor}
         />
         {this.renderScrollView()}
         {this.renderNavbarBackground()}
@@ -371,6 +371,7 @@ RNParallax.propTypes = {
   containerStyle: PropTypes.any,
   alwaysShowTitle: PropTypes.bool,
   alwaysShowNavBar: PropTypes.bool,
+  statusBarColor: PropTypes.string,
 };
 
 RNParallax.defaultProps = {
@@ -389,6 +390,7 @@ RNParallax.defaultProps = {
   containerStyle: null,
   alwaysShowTitle: true,
   alwaysShowNavBar: true,
+  statusBarColor: null,
 };
 
 export default RNParallax;
