@@ -318,19 +318,20 @@ class RNParallax extends Component {
 
   renderScrollView() {
     const {
-      renderContent, scrollEventThrottle, contentContainerStyle, containerStyle,
+      renderContent, scrollEventThrottle, scrollViewStyle, contentContainerStyle, innerContainerStyle, scrollViewProps,
     } = this.props;
     const { scrollY } = this.state;
     return (
       <Animated.ScrollView
-        style={styles.scrollView}
+        style={[styles.scrollView, scrollViewStyle]}
+        contentContainerStyle={contentContainerStyle}
         scrollEventThrottle={scrollEventThrottle}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
         )}
-        contentContainerStyle={contentContainerStyle}
+        {...scrollViewProps}
       >
-        <View style={[{ marginTop: this.getHeaderMaxHeight() }, containerStyle]}>
+        <View style={[{ marginTop: this.getHeaderMaxHeight() }, innerContainerStyle]}>
           {renderContent()}
         </View>
       </Animated.ScrollView>
@@ -338,9 +339,9 @@ class RNParallax extends Component {
   }
 
   render() {
-    const { navbarColor, statusBarColor } = this.props;
+    const { navbarColor, statusBarColor, containerStyle } = this.props;
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, containerStyle]}>
         <StatusBar
           backgroundColor={statusBarColor || navbarColor}
         />
@@ -368,10 +369,13 @@ RNParallax.propTypes = {
   extraScrollHeight: PropTypes.number,
   backgroundImageScale: PropTypes.number,
   contentContainerStyle: PropTypes.any,
+  innerContainerStyle: PropTypes.any,
+  scrollViewStyle: PropTypes.any,
   containerStyle: PropTypes.any,
   alwaysShowTitle: PropTypes.bool,
   alwaysShowNavBar: PropTypes.bool,
   statusBarColor: PropTypes.string,
+  scrollViewProps: PropTypes.object,
 };
 
 RNParallax.defaultProps = {
@@ -387,10 +391,13 @@ RNParallax.defaultProps = {
   extraScrollHeight: DEFAULT_EXTRA_SCROLL_HEIGHT,
   backgroundImageScale: DEFAULT_BACKGROUND_IMAGE_SCALE,
   contentContainerStyle: null,
+  innerContainerStyle: null,
+  scrollViewStyle: null,
   containerStyle: null,
   alwaysShowTitle: true,
   alwaysShowNavBar: true,
   statusBarColor: null,
+  scrollViewProps: {},
 };
 
 export default RNParallax;

@@ -89,8 +89,13 @@ render() {
         backgroundImageScale={1.2}
         renderNavBar={this.renderNavBar}
         renderContent={this.renderContent}
-        contentContainerStyle={{ flexGrow: 1 }}
         containerStyle={{ flex: 1 }}
+        contentContainerStyle={{ flexGrow: 1 }}
+        innerContainerStyle={{ flex: 1 }}
+        scrollViewProps={{
+          onScrollBeginDrag: () => console.log('onScrollBeginDrag'),
+          onScrollEndDrag: () => console.log('onScrollEndDrag'),
+        }}
       />
     </View>
   );
@@ -113,7 +118,10 @@ render() {
 | `title` | `any` | No | This is the title to be display in the header, can be string or component | Default to `null` |
 | `titleStyle` | `style` | No | This is the title style to override default font size/color | Default to `color: ‘white’ `text and `fontSize: 16` |
 | `scrollEventThrottle` | `number` | No | This is the scroll event throttle | Default is `16` |
-| `contentContainerStyle` | `style` | No | This is the contentContainerStyle style to override default `<ScrollView>` contentContainerStyle style | Default to `null` |
-| `contentStyle` | `style` | No | This is the inner content style to override default `<View>` style inside `<ScrollView>` component | Default to `null` |
+| `contentContainerStyle` | `style` | No | This is the contentContainerStyle style to override default `<ScrollView>` contentContainerStyle style | Default to null |
+| `containerStyle` | `style` | No | This is the style to override default outermost `<View>` style | Default to null |
+| `scrollViewStyle` | `style` | No | This is the scrollview style to override default `<ScrollView>` style | Default to null |
+| `innerContainerStyle` | `style` | No | This is the inner content style to override default `<View>` style inside `<ScrollView>` component | Default to null |
 | `alwaysShowTitle` | `bool` | No | This is to determine whether show or hide the title after scroll | Default to `true` |
 | `alwaysShowNavBar` | `bool` | No | This is to determine whether show or hide the navBar before scroll | Default to `true` |
+| `scrollViewProps` | `object` | No | This is to override default scroll view properties | Default to `{}` |
