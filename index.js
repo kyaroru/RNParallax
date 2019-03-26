@@ -268,7 +268,7 @@ class RNParallax extends Component {
   }
 
   renderHeaderTitle() {
-    const { title, titleStyle } = this.props;
+    const { title, titleStyle, headerTitleStyle } = this.props;
     const titleTranslateY = this.getTitleTranslateY();
     const titleOpacity = this.getTitleOpacity();
 
@@ -283,6 +283,7 @@ class RNParallax extends Component {
             height: this.getHeaderHeight(),
             opacity: titleOpacity,
           },
+          headerTitleStyle
         ]}
       >
         {typeof title === 'string'
@@ -363,6 +364,7 @@ RNParallax.propTypes = {
   navbarColor: PropTypes.string,
   title: PropTypes.any,
   titleStyle: PropTypes.any,
+  headerTitleStyle: PropTypes.any,
   headerMaxHeight: PropTypes.number,
   headerMinHeight: PropTypes.number,
   scrollEventThrottle: PropTypes.number,
@@ -385,6 +387,7 @@ RNParallax.defaultProps = {
   backgroundImage: null,
   title: null,
   titleStyle: styles.headerText,
+  headerTitleStyle: null,
   headerMaxHeight: DEFAULT_HEADER_MAX_HEIGHT,
   headerMinHeight: DEFAULT_HEADER_MIN_HEIGHT,
   scrollEventThrottle: SCROLL_EVENT_THROTTLE,
