@@ -35,27 +35,33 @@ const HEADER_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 64;
 const NAV_BAR_HEIGHT = HEADER_HEIGHT - STATUS_BAR_HEIGHT;
 
 const images = {
-  background: require('../../../img/test.jpg'),
+  background: require('../img/test.jpg'), // Put your own image here
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  contentContainer: {
+    flexGrow: 1,
+  },
   navContainer: {
     height: HEADER_HEIGHT,
     marginHorizontal: 10,
   },
   statusBar: {
     height: STATUS_BAR_HEIGHT,
-    backgroundColor: Colors.transparent,
+    backgroundColor: 'transparent',
   },
   navBar: {
     height: NAV_BAR_HEIGHT,
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
-    backgroundColor: Colors.transparent,
+    backgroundColor: 'transparent',
   },
   titleStyle: {
-    color: Colors.white,
+    color: 'white',
     fontWeight: 'bold',
     fontSize: 18,
   },
@@ -77,21 +83,21 @@ renderNavBar = () => (
 
 render() {
   return (
-    <View style={commonStyles.container}>
+    <View style={styles.container}>
       <ReactNativeParallaxHeader
         headerMinHeight={HEADER_HEIGHT}
         headerMaxHeight={250}
         extraScrollHeight={20}
-        navbarColor={Colors.primary}
+        navbarColor="#3498db"
         title="Parallax Header ~"
         titleStyle={styles.titleStyle}
         backgroundImage={images.background}
         backgroundImageScale={1.2}
         renderNavBar={this.renderNavBar}
         renderContent={this.renderContent}
-        containerStyle={{ flex: 1 }}
-        contentContainerStyle={{ flexGrow: 1 }}
-        innerContainerStyle={{ flex: 1 }}
+        containerStyle={styles.container}
+        contentContainerStyle={styles.contentContainer}
+        innerContainerStyle={styles.container}
         scrollViewProps={{
           onScrollBeginDrag: () => console.log('onScrollBeginDrag'),
           onScrollEndDrag: () => console.log('onScrollEndDrag'),
