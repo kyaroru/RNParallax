@@ -8,6 +8,7 @@ import {
   View,
   Dimensions,
   StatusBar,
+  Easing
 } from 'react-native';
 
 const {
@@ -178,12 +179,13 @@ class RNParallax extends Component {
     });
   }
 
-  getTitleOpacity() {
+  getTitleOpacity(titleEasing = Easing.linear()) {
     const { scrollY } = this.state;
     const { alwaysShowTitle } = this.props;
     return scrollY.interpolate({
       inputRange: this.getInputRange(),
       outputRange: [1, 1, alwaysShowTitle ? 1 : 0],
+      easing: titleEasing,
       extrapolate: 'clamp',
     });
   }
@@ -268,9 +270,9 @@ class RNParallax extends Component {
   }
 
   renderHeaderTitle() {
-    const { title, titleStyle, headerTitleStyle } = this.props;
+    const { title, titleStyle, headerTitleStyle, titleEasing } = this.props;
     const titleTranslateY = this.getTitleTranslateY();
-    const titleOpacity = this.getTitleOpacity();
+    const titleOpacity = this.getTitleOpacity(titleEasing);
 
     return (
       <Animated.View
@@ -375,6 +377,7 @@ RNParallax.propTypes = {
   navbarColor: PropTypes.string,
   title: PropTypes.any,
   titleStyle: PropTypes.any,
+  titleEasing: PropTypes.number,
   headerTitleStyle: PropTypes.any,
   headerMaxHeight: PropTypes.number,
   headerMinHeight: PropTypes.number,
