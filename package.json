@@ -21,5 +21,6 @@
   "bugs": {
     "url": "https://github.com/kyaroru/RNParallax/issues"
   },
-  "homepage": "https://github.com/kyaroru/RNParallax#readme"
+  "homepage": "https://github.com/kyaroru/RNParallax#readme",
+  "typings": "./index.d.ts"
 }
