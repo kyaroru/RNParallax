@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -248,8 +249,13 @@ class RNParallax extends Component {
     );
   }
 
+  renderBackgroundImageWrapper = () => {
+    const {renderBackgroundImageWrapper} = this.props;
+    return renderBackgroundImageWrapper(this.renderBackgroundImage())
+  }
+
   renderHeaderBackground() {
-    const {backgroundImage, backgroundColor} = this.props;
+    const {backgroundImage, backgroundColor, renderBackgroundOverlay, renderBackgroundImageWrapper} = this.props;
     const imageOpacity = this.getImageOpacity();
 
     return (
@@ -262,8 +268,10 @@ class RNParallax extends Component {
             backgroundColor: backgroundImage ? 'transparent' : backgroundColor,
           },
         ]}>
-        {backgroundImage && this.renderBackgroundImage()}
+        {backgroundImage && !renderBackgroundImageWrapper && this.renderBackgroundImage()}
+        {backgroundImage && renderBackgroundImageWrapper && this.renderBackgroundImageWrapper()}
         {!backgroundImage && this.renderPlainBackground()}
+        {renderBackgroundOverlay()}
       </Animated.View>
     );
   }
@@ -385,6 +393,8 @@ RNParallax.propTypes = {
   alwaysShowNavBar: PropTypes.bool,
   statusBarColor: PropTypes.string,
   scrollViewProps: PropTypes.object,
+  renderBackgroundOverlay: PropTypes.func,
+  renderBackgroundImageWrapper: PropTypes.func,
 };
 
 RNParallax.defaultProps = {
@@ -408,6 +418,8 @@ RNParallax.defaultProps = {
   alwaysShowNavBar: true,
   statusBarColor: null,
   scrollViewProps: {},
+  renderBackgroundOverlay: () => null,
+  renderBackgroundImageWrapper: null,
 };
 
 export default RNParallax;
