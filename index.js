@@ -415,6 +415,8 @@ RNParallax.defaultProps = {
   alwaysShowTitle: true,
   alwaysShowNavBar: true,
   statusBarColor: null,
+  statusBarTranslucent: false,
+  statusBarStyle: 'dark-content',
   scrollViewProps: {},
   headerStyle: {},
   headerContent: null
