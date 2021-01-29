@@ -35,6 +35,13 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
+    
+    //Fixes missing pull to refresh refresh indicator
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: '100%',
   },
   header: {
     position: 'absolute',
@@ -348,11 +355,13 @@ class RNParallax extends Component {
           backgroundColor={statusBarColor || navbarColor}
           translucent={statusBarTranslucent} barStyle={statusBarStyle? statusBarStyle : 'dark-content'}
         />
-        {this.renderScrollView()}
         {this.renderNavbarBackground()}
         {this.renderHeaderBackground()}
         {this.renderHeaderTitle()}
         {this.renderHeaderForeground()}
+
+        //Fixes missing pull to refresh refresh indicator
+        {this.renderScrollView()}
       </View>
     );
   }
