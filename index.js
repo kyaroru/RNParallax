@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {
   StyleSheet,
@@ -10,9 +10,7 @@ import {
   StatusBar,
 } from 'react-native';
 
-const {
-  height: SCREEN_HEIGHT,
-} = Dimensions.get('window');
+const {height: SCREEN_HEIGHT} = Dimensions.get('window');
 
 const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
@@ -94,12 +92,12 @@ class RNParallax extends Component {
   }
 
   getHeaderMaxHeight() {
-    const { headerMaxHeight } = this.props;
+    const {headerMaxHeight} = this.props;
     return headerMaxHeight;
   }
 
   getHeaderMinHeight() {
-    const { headerMinHeight } = this.props;
+    const {headerMinHeight} = this.props;
     return headerMinHeight;
   }
 
@@ -108,12 +106,12 @@ class RNParallax extends Component {
   }
 
   getExtraScrollHeight() {
-    const { extraScrollHeight } = this.props;
+    const {extraScrollHeight} = this.props;
     return extraScrollHeight;
   }
 
   getBackgroundImageScale() {
-    const { backgroundImageScale } = this.props;
+    const {backgroundImageScale} = this.props;
     return backgroundImageScale;
   }
 
@@ -122,16 +120,20 @@ class RNParallax extends Component {
   }
 
   getHeaderHeight() {
-    const { scrollY } = this.state;
+    const {scrollY} = this.state;
     return scrollY.interpolate({
       inputRange: this.getInputRange(),
-      outputRange: [this.getHeaderMaxHeight() + this.getExtraScrollHeight(), this.getHeaderMaxHeight(), this.getHeaderMinHeight()],
+      outputRange: [
+        this.getHeaderMaxHeight() + this.getExtraScrollHeight(),
+        this.getHeaderMaxHeight(),
+        this.getHeaderMinHeight(),
+      ],
       extrapolate: 'clamp',
     });
   }
 
   getNavBarOpacity() {
-    const { scrollY } = this.state;
+    const {scrollY} = this.state;
     return scrollY.interpolate({
       inputRange: this.getInputRange(),
       outputRange: [0, 1, 1],
@@ -140,8 +142,8 @@ class RNParallax extends Component {
   }
 
   getNavBarForegroundOpacity() {
-    const { scrollY } = this.state;
-    const { alwaysShowNavBar } = this.props;
+    const {scrollY} = this.state;
+    const {alwaysShowNavBar} = this.props;
     return scrollY.interpolate({
       inputRange: this.getInputRange(),
       outputRange: [alwaysShowNavBar ? 1 : 0, alwaysShowNavBar ? 1 : 0, 1],
@@ -150,7 +152,7 @@ class RNParallax extends Component {
   }
 
   getImageOpacity() {
-    const { scrollY } = this.state;
+    const {scrollY} = this.state;
     return scrollY.interpolate({
       inputRange: this.getInputRange(),
       outputRange: [1, 1, 0],
@@ -159,7 +161,7 @@ class RNParallax extends Component {
   }
 
   getImageTranslate() {
-    const { scrollY } = this.state;
+    const {scrollY} = this.state;
     return scrollY.interpolate({
       inputRange: this.getInputRange(),
       outputRange: [0, 0, -50],
@@ -168,7 +170,7 @@ class RNParallax extends Component {
   }
 
   getImageScale() {
-    const { scrollY } = this.state;
+    const {scrollY} = this.state;
     return scrollY.interpolate({
       inputRange: this.getInputRange(),
       outputRange: [this.getBackgroundImageScale(), 1, 1],
@@ -177,7 +179,7 @@ class RNParallax extends Component {
   }
 
   getTitleTranslateY() {
-    const { scrollY } = this.state;
+    const {scrollY} = this.state;
     return scrollY.interpolate({
       inputRange: this.getInputRange(),
       outputRange: [5, 0, 0],
@@ -186,8 +188,8 @@ class RNParallax extends Component {
   }
 
   getTitleOpacity() {
-    const { scrollY } = this.state;
-    const { alwaysShowTitle } = this.props;
+    const {scrollY} = this.state;
+    const {alwaysShowTitle} = this.props;
     return scrollY.interpolate({
       inputRange: this.getInputRange(),
       outputRange: [1, 1, alwaysShowTitle ? 1 : 0],
@@ -196,7 +198,7 @@ class RNParallax extends Component {
   }
 
   renderBackgroundImage() {
-    const { backgroundImage } = this.props;
+    const {backgroundImage} = this.props;
     const imageOpacity = this.getImageOpacity();
     const imageTranslate = this.getImageTranslate();
     const imageScale = this.getImageScale();
@@ -208,7 +210,7 @@ class RNParallax extends Component {
           {
             height: this.getHeaderMaxHeight(),
             opacity: imageOpacity,
-            transform: [{ translateY: imageTranslate }, { scale: imageScale }],
+            transform: [{translateY: imageTranslate}, {scale: imageScale}],
           },
         ]}
         source={backgroundImage}
@@ -217,7 +219,7 @@ class RNParallax extends Component {
   }
 
   renderPlainBackground() {
-    const { backgroundColor } = this.props;
+    const {backgroundColor} = this.props;
 
     const imageOpacity = this.getImageOpacity();
     const imageTranslate = this.getImageTranslate();
@@ -229,14 +231,14 @@ class RNParallax extends Component {
           height: this.getHeaderMaxHeight(),
           backgroundColor,
           opacity: imageOpacity,
-          transform: [{ translateY: imageTranslate }, { scale: imageScale }],
+          transform: [{translateY: imageTranslate}, {scale: imageScale}],
         }}
       />
     );
   }
 
   renderNavbarBackground() {
-    const { navbarColor } = this.props;
+    const {navbarColor} = this.props;
     const navBarOpacity = this.getNavBarOpacity();
 
     return (
@@ -276,7 +278,7 @@ class RNParallax extends Component {
   }
 
   renderHeaderTitle() {
-    const { title, titleStyle, headerTitleStyle } = this.props;
+    const {title, titleStyle, headerTitleStyle} = this.props;
     const titleTranslateY = this.getTitleTranslateY();
     const titleOpacity = this.getTitleOpacity();
 
@@ -285,29 +287,22 @@ class RNParallax extends Component {
         style={[
           styles.headerTitle,
           {
-            transform: [
-              { translateY: titleTranslateY },
-            ],
+            transform: [{translateY: titleTranslateY}],
             height: this.getHeaderHeight(),
             opacity: titleOpacity,
           },
-          headerTitleStyle
-        ]}
-      >
-        {typeof title === 'string'
-          && (
-            <Text style={[styles.headerText, titleStyle]}>
-              {title}
-            </Text>
-          )
-        }
+          headerTitleStyle,
+        ]}>
+        {typeof title === 'string' && (
+          <Text style={[styles.headerText, titleStyle]}>{title}</Text>
+        )}
         {typeof title !== 'string' && title}
       </Animated.View>
     );
   }
 
   renderHeaderForeground() {
-    const { renderNavBar } = this.props;
+    const {renderNavBar} = this.props;
     const navBarOpacity = this.getNavBarForegroundOpacity();
 
     return (
@@ -318,8 +313,7 @@ class RNParallax extends Component {
             height: this.getHeaderMinHeight(),
             opacity: navBarOpacity,
           },
-        ]}
-      >
+        ]}>
         {renderNavBar()}
       </Animated.View>
     );
@@ -327,20 +321,36 @@ class RNParallax extends Component {
 
   renderScrollView() {
     const {
-      renderContent, scrollEventThrottle, scrollViewStyle, contentContainerStyle, innerContainerStyle, scrollViewProps,
+      renderContent,
+      scrollEventThrottle,
+      scrollViewStyle,
+      contentContainerStyle,
+      innerContainerStyle,
+      scrollViewProps,
     } = this.props;
-    const { scrollY } = this.state;
+    const {scrollY} = this.state;
+    const {onScroll} = scrollViewProps;
+
+    // remove scrollViewProps.onScroll in renderScrollViewProps so we can still get default scroll behavior
+    // if a caller passes in `onScroll` prop
+    const renderableScrollViewProps = Object.assign({}, scrollViewProps);
+    delete renderableScrollViewProps.onScroll;
+
     return (
       <Animated.ScrollView
         style={[styles.scrollView, scrollViewStyle]}
         contentContainerStyle={contentContainerStyle}
         scrollEventThrottle={scrollEventThrottle}
         onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          [{nativeEvent: {contentOffset: {y: scrollY}}}],
+          {
+            useNativeDriver: false,
+            listener: onScroll,
+          },
         )}
-        {...scrollViewProps}
-      >
-        <View style={[{ marginTop: this.getHeaderMaxHeight() }, innerContainerStyle]}>
+        {...renderableScrollViewProps}>
+        <View
+          style={[{marginTop: this.getHeaderMaxHeight()}, innerContainerStyle]}>
           {renderContent()}
         </View>
       </Animated.ScrollView>
