@@ -370,7 +370,6 @@ class RNParallax extends Component {
         {this.renderHeaderTitle()}
         {this.renderHeaderForeground()}
 
-        //Fixes missing pull to refresh refresh indicator
         {this.renderScrollView()}
       </View>
     );
