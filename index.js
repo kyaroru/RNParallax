@@ -28,11 +28,18 @@ const DEFAULT_TITLE_COLOR = 'white';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     flex: 1,
   },
   scrollView: {
     flex: 1,
+    
+    //Fixes missing pull to refresh refresh indicator
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: '100%',
   },
   header: {
     position: 'absolute',
@@ -242,14 +249,14 @@ class RNParallax extends Component {
             height: this.getHeaderHeight(),
             backgroundColor: navbarColor,
             opacity: navBarOpacity,
-          },
+          }, this.props.headerStyle
         ]}
       />
     );
   }
 
   renderHeaderBackground() {
-    const {backgroundImage, backgroundColor} = this.props;
+    const { backgroundImage, backgroundColor, headerContent } = this.props;
     const imageOpacity = this.getImageOpacity();
 
     return (
@@ -260,8 +267,10 @@ class RNParallax extends Component {
             height: this.getHeaderHeight(),
             opacity: imageOpacity,
             backgroundColor: backgroundImage ? 'transparent' : backgroundColor,
-          },
-        ]}>
+          }, this.props.headerStyle
+        ]}
+      >
+        {headerContent? headerContent() : null}
         {backgroundImage && this.renderBackgroundImage()}
         {!backgroundImage && this.renderPlainBackground()}
       </Animated.View>
@@ -349,15 +358,19 @@ class RNParallax extends Component {
   }
 
   render() {
-    const {navbarColor, statusBarColor, containerStyle} = this.props;
+    const { navbarColor, statusBarColor, containerStyle, statusBarStyle, statusBarTranslucent } = this.props;
     return (
       <View style={[styles.container, containerStyle]}>
-        <StatusBar backgroundColor={statusBarColor || navbarColor} />
-        {this.renderScrollView()}
+        <StatusBar
+          backgroundColor={statusBarColor || navbarColor}
+          translucent={statusBarTranslucent} barStyle={statusBarStyle? statusBarStyle : 'dark-content'}
+        />
         {this.renderNavbarBackground()}
         {this.renderHeaderBackground()}
         {this.renderHeaderTitle()}
         {this.renderHeaderForeground()}
+
+        {this.renderScrollView()}
       </View>
     );
   }
@@ -384,7 +397,11 @@ RNParallax.propTypes = {
   alwaysShowTitle: PropTypes.bool,
   alwaysShowNavBar: PropTypes.bool,
   statusBarColor: PropTypes.string,
+  statusBarTranslucent: PropTypes.bool,
+  statusBarStyle: PropTypes.string,
   scrollViewProps: PropTypes.object,
+  headerStyle: PropTypes.object,
+  headerContent: PropTypes.func
 };
 
 RNParallax.defaultProps = {
@@ -407,7 +424,11 @@ RNParallax.defaultProps = {
   alwaysShowTitle: true,
   alwaysShowNavBar: true,
   statusBarColor: null,
+  statusBarTranslucent: false,
+  statusBarStyle: 'dark-content',
   scrollViewProps: {},
+  headerStyle: {},
+  headerContent: null
 };
 
 export default RNParallax;
